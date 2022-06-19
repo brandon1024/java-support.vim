@@ -1,0 +1,41 @@
+Describe java
+	Describe #IsValidIdentifier
+		It should return false is empty string provided
+			Assert False(java_support#java#IsValidIdentifier(''))
+		End
+
+		It should return false if does not match valid identifier
+			let l:invalid = [
+				\ '.thing',
+				\ '1thing',
+				\ 'thing@',
+				\ 'th@ing',
+				\ 'th ing'
+				\ ]
+
+			for ident in l:invalid
+				Assert False(java_support#java#IsValidIdentifier(ident), 'failed for ' . ident)
+			endfor
+		End
+
+		It should return true if does match valid identifier
+			let l:invalid = [
+				\ '$thing',
+				\ '_thing',
+				\ 'thing1',
+				\ 'Thing1',
+				\ 'T',
+				\ 'T$1_'
+				\ ]
+
+			for ident in l:invalid
+				Assert True(java_support#java#IsValidIdentifier(ident), 'failed for ' . ident)
+			endfor
+		End
+	End
+
+	Describe #NormalizeImportStatements
+		TODO
+	End
+End
+
